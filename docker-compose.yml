@@ -1,0 +1,25 @@
+
+version: '3.9'
+
+services:
+  navmodule:
+    image: navcontainer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    container_name: sqlserver
+    hostname: sqlserver
+    environment:
+      MSSQL_SA_PASSWORD: "5cje&A98#6a!"
+      ACCEPT_EULA: "Y"
+    restart: unless-stopped    
+    ports:
+      - "1433:1433"
+      
